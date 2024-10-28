@@ -2,6 +2,7 @@ package com.api.cursos.service;
 
 import com.api.cursos.dto.CursoDTOResponse;
 import com.api.cursos.exception.CurseFoundExeception;
+import com.api.cursos.exception.CurseNotFoundException;
 import com.api.cursos.model.CursoModel;
 import com.api.cursos.repository.CursosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Locale.Category;
 
 @Service
 public class CursosService {
@@ -27,10 +29,17 @@ public class CursosService {
         return curso;
     }
 
-    public CursoDTOResponse get(String name){
-        var todoSCursos = this.cursosRepository.findByName(name).orElseThrow(() -> {
-            throw new UserNotFoun
+    public CursoDTOResponse todosCursos(String name, String category){
+        var todosCursos = this.cursosRepository.findByNameAndCategory(name, category).orElseThrow(() -> {
+            throw new CurseNotFoundException();
         });
+
+        var cursosDto = CursoDTOResponse.builder()
+        .name(todosCursos.getName())
+        .category(todosCursos.getCategory())
+        .build();
+
+        return  cursosDto;
 
     }
 }

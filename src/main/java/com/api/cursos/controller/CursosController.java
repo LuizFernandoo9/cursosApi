@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+       
 
 @RestController
 @RequestMapping("/cursos")
@@ -28,13 +28,15 @@ public class CursosController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Object>> buscarCurso(@Valid @RequestBody CursoModel cursoModel){
-        try {
-            //var buscarCursos = cursosService.get(cursoModel);
-            return ResponseEntity.status(HttpStatus.ACCEPTED).body(buscarCursos);
-        } catch (Exception e) {
+    public ResponseEntity<Object> buscarCurso(@Valid @RequestBody CursoModel cursoModel){
+        try{
+            var cursos = this.cursosService.todosCursos(cursoModel.getName(), cursoModel.getCategory());
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(cursos);
+        }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+
     }
+       
 
 }
