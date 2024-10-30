@@ -7,10 +7,10 @@ import com.api.cursos.model.CursoModel;
 import com.api.cursos.repository.CursosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import java.util.UUID;
 import java.util.List;
-import java.util.Locale.Category;
+import java.util.stream.Collectors;
 
 @Service
 public class CursosService {
@@ -29,17 +29,47 @@ public class CursosService {
         return curso;
     }
 
-    public CursoDTOResponse todosCursos(String name, String category){
-        var todosCursos = this.cursosRepository.findByNameAndCategory(name, category).orElseThrow(() -> {
+    public List<CursoDTOResponse> todosCursos( CursoModel cursoModel){
+        
+        if(cursoModel.getName().isEmpty() && cursoModel.getCategory().isEmpty()){
+            return this.cursosRepository.findAll().stream().map(curso -> CursoDTOResponse.builder()
+                    .name(curso.getName())
+                    .category(curso.getCategory())
+                    .active(curso.getActive())
+                    .createdAt(curso.getCreatedAt())
+                    .updatedAt(curso.getUpdatedAt())
+                    .build())
+                    .collect(Collectors.toList());
+        }else{
+            var curso = this.cursosRepository.findByNameAndCategory(cursoModel.getName(), cursoModel.getCategory()).orElseThrow(() -> {
+                throw new CurseNotFoundException();
+            });
+
+            return List.of(CursoDTOResponse.builder()
+                    .name(curso.getName())
+                    .category(curso.getCategory())
+                    .active(curso.getActive())
+                    .createdAt(curso.getCreatedAt())
+                    .updatedAt(curso.getUpdatedAt())
+                    .build());
+        }   
+    }
+    
+    public CursoDTOResponse alterar(CursoModel cursoModel, UUID id){
+           
+        var alterarCurso = this.cursosRepository.findById(id).orElseThrow(() -> {
             throw new CurseNotFoundException();
         });
 
-        var cursosDto = CursoDTOResponse.builder()
-        .name(todosCursos.getName())
-        .category(todosCursos.getCategory())
-        .build();
-
-        return  cursosDto;
-
+        if(cursoModel.getName().isEmpty()){
+            return CursoDTOResponse.builder()
+            .category(alterarCurso.getCategory())
+            .build();
+        }
+        else{
+            return CursoDTOResponse.builder()
+            .name(alterarCurso.getName())
+            .build();
+        }
     }
 }

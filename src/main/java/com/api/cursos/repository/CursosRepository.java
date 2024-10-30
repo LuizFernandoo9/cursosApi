@@ -13,5 +13,7 @@ public interface CursosRepository extends JpaRepository<CursoModel, UUID> {
 
     Optional<CursoModel> findByNameAndCategory(String name, String category);
 
+    Optional<CursoModel> findByNameOrCategory(String name, String category);
+
     Optional<CursoModel> findByName(String name);
 }

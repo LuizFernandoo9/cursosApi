@@ -26,10 +26,8 @@ public class CursoModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank
     private String name;
 
-    @NotBlank
     private String category;
 
     private String active;
