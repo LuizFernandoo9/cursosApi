@@ -52,5 +52,7 @@ O **Swagger** será implementado futuramente para facilitar a documentação e o
 2. **Instale as dependencias**:
    mvn install
 
-3. **Execute a aplicação**
+3. **Execute a aplicação**:
    mvn spring-boot:run 
+
+> **Nota**: Certificar se o banco de dados PostgreSQL esteja configurado e rodando.
