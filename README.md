@@ -14,8 +14,8 @@ Esta API fictícia foi desenvolvida para gerenciar cursos de programação, com 
 - **Criação de curso:** Adiciona um novo curso ao banco de dados com dados como nome, categoria e timestamps automáticos.
 - **Listagem de cursos:** Exibe todos os cursos cadastrados, com filtros opcionais por nome e categoria.
 - **Atualização de curso:** Permite a edição do nome ou categoria de um curso pelo `id`, mantendo a consistência de dados.
-- **Remoção de curso:** Exclui um curso do banco de dados usando o `id`.
-- **Alteração do status ativo/inativo:** Toggle de ativação do curso, ajustando o estado de `active`.
+- **Remoção de curso:** Exclui um curso do banco de dados usando o `id`. (pendente)
+- **Alteração do status ativo/inativo:** Toggle de ativação do curso, ajustando o estado de `active`. (pendente)
 
 ## 📑 Estrutura das Rotas e Regras de Negócio
 
