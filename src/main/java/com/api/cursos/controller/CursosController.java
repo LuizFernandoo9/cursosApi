@@ -1,6 +1,5 @@
 package com.api.cursos.controller;
 
-import com.api.cursos.dto.CursoDTOResponse;
 import com.api.cursos.model.CursoModel;
 import com.api.cursos.service.CursosService;
 import jakarta.validation.Valid;
@@ -9,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
-
-       
 
 @RestController
 @RequestMapping("/cursos")
@@ -37,17 +34,39 @@ public class CursosController {
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-
     }
        
     @PutMapping("/{id}")
-    public ResponseEntity<Object> alterarCurso(@RequestBody CursoModel cursoModel, @PathVariable UUID id){
+    public ResponseEntity<Object> alterarCurso(@Valid @RequestBody CursoModel cursoModel, @PathVariable UUID id){
         try{
             var alterar = this.cursosService.alterar(cursoModel, id);
             return ResponseEntity.status(HttpStatus.OK).body(alterar);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.OK).body(e.getMessage());
         }
+    }
+
+    @PatchMapping("/{id}/active")
+    public ResponseEntity<Object> alteracaoActive(@Valid @RequestBody CursoModel cursoModel, @PathVariable UUID id){
+        try{
+            var alteracao = this.cursosService.alterarCursoActive(cursoModel, id);
+            return ResponseEntity.status(HttpStatus.OK).body(alteracao);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletarCurso(@PathVariable UUID id){
+
+        try{
+            this.cursosService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Curso deletado com sucesso!");
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
     }
 
 }

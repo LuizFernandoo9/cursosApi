@@ -2,6 +2,9 @@ package com.api.cursos.dto;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.api.cursos.enums.Status;
+
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,9 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CursoDTOResponse {
 
+    
     private String name;
     private String category;
-    private String active;
+    private Status active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

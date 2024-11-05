@@ -1,13 +1,14 @@
 package com.api.cursos.service;
 
+import com.api.cursos.dto.CursoDTOActive;
 import com.api.cursos.dto.CursoDTOResponse;
+import com.api.cursos.enums.Status;
 import com.api.cursos.exception.CurseFoundExeception;
 import com.api.cursos.exception.CurseNotFoundException;
 import com.api.cursos.model.CursoModel;
 import com.api.cursos.repository.CursosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PutMapping;
 import java.util.UUID;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,20 +57,51 @@ public class CursosService {
     }
     
     public CursoDTOResponse alterar(CursoModel cursoModel, UUID id){
-           
         var alterarCurso = this.cursosRepository.findById(id).orElseThrow(() -> {
             throw new CurseNotFoundException();
         });
 
         if(cursoModel.getName().isEmpty()){
+            alterarCurso.setCategory(cursoModel.getCategory());
+            cursosRepository.save(alterarCurso);
+
             return CursoDTOResponse.builder()
-            .category(alterarCurso.getCategory())
-            .build();
+            .category(alterarCurso.getCategory()).build();
+            
         }
         else{
+            alterarCurso.setName(cursoModel.getName());
+            cursosRepository.save(alterarCurso);
+
             return CursoDTOResponse.builder()
-            .name(alterarCurso.getName())
-            .build();
+            .name(alterarCurso.getName()).build();
         }
+    }
+
+    public CursoDTOActive alterarCursoActive(CursoModel cursoModel, UUID id){
+        var alterarActive = this.cursosRepository.findById(id).orElseThrow(() -> {
+            throw new CurseNotFoundException();
+        });
+
+        if(alterarActive.getActive() == Status.ACTIVE){
+            alterarActive.setActive(Status.INACTIVE);
+            cursosRepository.save(alterarActive);
+            return CursoDTOActive.builder()
+            .active(alterarActive.getActive()).build();
+        }else{
+            alterarActive.setActive(Status.ACTIVE);
+            cursosRepository.save(alterarActive);
+            return CursoDTOActive.builder()
+            .active(alterarActive.getActive()).build();
+        }
+    }
+
+    public void delete(UUID id){
+
+        this.cursosRepository.findById(id).orElseThrow(() -> {
+            throw new CurseNotFoundException();
+        });
+
+       this.cursosRepository.deleteById(id);
     }
 }

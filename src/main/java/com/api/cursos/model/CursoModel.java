@@ -1,16 +1,23 @@
 package com.api.cursos.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.api.cursos.enums.Status;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -26,11 +33,16 @@ public class CursoModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank(message = "O campo 'name' é obrigatório e não pode estar vazio.")
+    @Schema(example = "Curso de Java")
     private String name;
 
+    @NotBlank(message = "O campo 'name' é obrigatório e não pode estar vazio.")
+    @Schema(example = "Tecnologia")
     private String category;
 
-    private String active;
+    @Enumerated(EnumType.STRING)
+    private Status active;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
