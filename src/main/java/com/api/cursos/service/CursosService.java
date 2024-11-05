@@ -78,7 +78,7 @@ public class CursosService {
         }
     }
 
-    public CursoDTOActive alterarCursoActive(CursoModel cursoModel, UUID id){
+    public CursoDTOActive alterarCursoActive(CursoDTOResponse cursoDTOResponse, UUID id){
         var alterarActive = this.cursosRepository.findById(id).orElseThrow(() -> {
             throw new CurseNotFoundException();
         });
@@ -101,7 +101,6 @@ public class CursosService {
         this.cursosRepository.findById(id).orElseThrow(() -> {
             throw new CurseNotFoundException();
         });
-
        this.cursosRepository.deleteById(id);
     }
 }

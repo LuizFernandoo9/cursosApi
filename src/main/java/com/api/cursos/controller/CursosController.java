@@ -1,5 +1,7 @@
 package com.api.cursos.controller;
 
+import com.api.cursos.dto.CursoDTOActive;
+import com.api.cursos.dto.CursoDTOResponse;
 import com.api.cursos.model.CursoModel;
 import com.api.cursos.service.CursosService;
 import jakarta.validation.Valid;
@@ -47,9 +49,9 @@ public class CursosController {
     }
 
     @PatchMapping("/{id}/active")
-    public ResponseEntity<Object> alteracaoActive(@Valid @RequestBody CursoModel cursoModel, @PathVariable UUID id){
+    public ResponseEntity<Object> alteracaoActive(@Valid @RequestBody CursoDTOResponse cursoDTOResponse, @PathVariable UUID id){
         try{
-            var alteracao = this.cursosService.alterarCursoActive(cursoModel, id);
+            var alteracao = this.cursosService.alterarCursoActive(cursoDTOResponse, id);
             return ResponseEntity.status(HttpStatus.OK).body(alteracao);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

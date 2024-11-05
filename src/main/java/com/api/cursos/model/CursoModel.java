@@ -33,11 +33,9 @@ public class CursoModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank(message = "O campo 'name' é obrigatório e não pode estar vazio.")
     @Schema(example = "Curso de Java")
     private String name;
 
-    @NotBlank(message = "O campo 'name' é obrigatório e não pode estar vazio.")
     @Schema(example = "Tecnologia")
     private String category;
 
