@@ -7,7 +7,7 @@ Esta API fictícia foi desenvolvida para gerenciar cursos de programação, com 
 - **Java 17**
 - **Spring Boot**
 - **PostgreSQL**
-- **Swagger** (implementação futura para documentação)
+- **Swagger** 
 - **JUnit 5** (implementação futura para testes)
 
 ## ✨ Funcionalidades
@@ -33,7 +33,7 @@ Esta API fictícia foi desenvolvida para gerenciar cursos de programação, com 
 - **`/src/test`**: Testes unitários e de integração para validação das rotas e regras de negócio (em desenvolvimento).
 
 ## 📦 Dependências
-Este projeto utiliza as seguintes dependências principais:
+Este projeto utiliza as seguintes dependências:
 
 - **Spring Boot Starter Data JPA**: Para integração com o banco de dados e manipulação de dados.
 - **Spring Boot Starter Validation**: Validações de dados de entrada.
@@ -43,7 +43,7 @@ Este projeto utiliza as seguintes dependências principais:
 - **Spring Boot Starter Test**: Framework de testes (JUnit 5) para validação de funcionalidades e rotas (ainda a ser implementado).
 
 ## 📜 Documentação da API
-O **Swagger** será implementado futuramente para facilitar a documentação e o teste das rotas.
+O **Swagger** foi usado para fins de documentação, facilitando a compreensão do código 
 
 ## ⚙️ Como Executar o Projeto
 1. **Clone o repositório**:
