@@ -1,7 +1,7 @@
 # API de Cursos
 
 ## 📝 Descrição
-Esta API fictícia foi desenvolvida para gerenciar cursos de programação, com operações CRUD completas e controle do status ativo/inativo dos cursos. Criada com foco em boas práticas e escalabilidade, a API utiliza Java 17, Spring Boot e PostgreSQL.
+API para gerenciar cursos de programação, com operações CRUD completas e controle do status ativo/inativo dos cursos. Criada com foco em boas práticas e escalabilidade, a API utiliza Java 17, Spring Boot e PostgreSQL.
 
 ## 🚀 Tecnologias Utilizadas
 - **Java 17**
